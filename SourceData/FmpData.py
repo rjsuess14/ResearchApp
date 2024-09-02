@@ -2,8 +2,6 @@ import os
 from dotenv import load_dotenv
 import fmpsdk
 import pandas as pd
-from openpyxl import Workbook
-from openpyxl.utils.dataframe import dataframe_to_rows
 import requests
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
 load_dotenv()
@@ -60,30 +58,4 @@ def fetch_company_info(ticker):
 
 
 
-
-def save_to_excel(is_df, bs_df, cfs_df, filename):
-    wb = Workbook()
-    
-    # Create sheets
-    ws1 = wb.active
-    ws1.title = "Income Statement"
-    ws2 = wb.create_sheet(title="Balance Sheet")
-    ws3 = wb.create_sheet(title="Cash Flow Statement")
-    
-    # Write DataFrames to sheets
-    for row in dataframe_to_rows(is_df, index=False, header=True):
-        ws1.append(row)
-    
-    for row in dataframe_to_rows(bs_df, index=False, header=True):
-        ws2.append(row)
-    
-    for row in dataframe_to_rows(cfs_df, index=False, header=True):
-        ws3.append(row)
-    
-    # Save the workbook
-    wb.save(filename)
-
-# Usage
-is_df, bs_df, cfs_df = fmp_fs_data('NSRGY', 'annual')
-save_to_excel(is_df, bs_df, cfs_df, f'fmp_output.xlsx')
 

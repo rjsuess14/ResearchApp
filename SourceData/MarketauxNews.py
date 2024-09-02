@@ -57,8 +57,3 @@ def parse_news(news_data):
         print(f"URL: {url}")
         print("-" * 50)
 
-if __name__ == "__main__":
-    news_data = fetch_news()
-    parse_news(news_data)
-
-
