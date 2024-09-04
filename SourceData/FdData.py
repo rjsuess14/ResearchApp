@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
-load_dotenv()
+load_dotenv(dotenv_path='.env', override=True)
 apikey = os.environ.get("FDAI_KEY")
 
 headers = {
@@ -12,7 +12,7 @@ headers = {
 }
 
 #Fetch financial statement data
-def fd_fs_data(ticker, period, limit):
+def fd_fs_data(ticker, period, limit=None):
     fs_url = f'https://api.financialdatasets.ai/financials/'
     querystring = {"ticker":ticker,"period":period,"limit":limit}
     fs_response = requests.get(fs_url, headers=headers, params=querystring)

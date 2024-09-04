@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 
 # Import API key stored in a .env file.
-load_dotenv()
+load_dotenv(dotenv_path='.env', override=True)
 FRED_API_KEY = os.environ.get("FRED_KEY")
 
 # FRED API functions

@@ -28,7 +28,7 @@ def clean_financial_df(df):
 
     return df
 
-def get_cleaned_financial_data(ticker, period, limit):
+def get_cleaned_financial_data(ticker, period, limit=None):
     fd_is_df, fd_bs_df, fd_cfs_df = fd_fs_data(ticker, period, limit)
     
     cleaned_is_df = clean_financial_df(fd_is_df)
@@ -39,4 +39,7 @@ def get_cleaned_financial_data(ticker, period, limit):
 
 # You can now use this function to get cleaned financial data
 # Example usage:
-# cleaned_is, cleaned_bs, cleaned_cfs = get_cleaned_financial_data('AAPL', 'annual', 10)
+cleaned_is, cleaned_bs, cleaned_cfs = get_cleaned_financial_data('AAPL', 'annual', 3)
+print(cleaned_is)
+print(cleaned_bs)
+print(cleaned_cfs)

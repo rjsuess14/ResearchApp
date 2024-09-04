@@ -6,7 +6,7 @@ import json
 from datetime import datetime, timedelta
 
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
-load_dotenv()
+load_dotenv(dotenv_path='.env', override=True)
 apikey = os.environ.get("MARKETAUX_KEY")
 
 #Retreive news data from API endpoint
