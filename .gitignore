@@ -1,0 +1,4 @@
+ResearchApp/.gitignore
+# Automatically created by ruff.
+# Ignore all files except specific ones
+!.env
