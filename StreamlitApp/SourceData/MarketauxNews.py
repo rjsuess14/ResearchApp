@@ -9,33 +9,28 @@ from datetime import datetime, timedelta
 load_dotenv(dotenv_path='.env', override=True)
 apikey = os.environ.get("MARKETAUX_KEY")
 
-#Retreive news data from API endpoint
-def fetch_news():
-    # Calculate the date 30 days ago
+# Combine fetching and parsing news data
+def get_news(ticker):
+    # Fetch news data
     published_window = (datetime.now() - timedelta(days=45)).strftime('%Y-%m-%d')
-
     conn = http.client.HTTPSConnection('api.marketaux.com')
-
     params = urllib.parse.urlencode({
         'api_token': apikey,
-        'symbols': 'AAPL',
+        'symbols': ticker,
         'limit': 3,
         'min_match_score': 10,
         'language':'en',
         'published_after': published_window,
         'filter_entities':'true'
     })
-
     conn.request('GET', '/v1/news/all?{}'.format(params))
-
     res = conn.getresponse()
     data = res.read()
+    news_data = json.loads(data.decode('utf-8'))
 
-    return json.loads(data.decode('utf-8'))
-
-#Parse through response data and pull out relevant fields
-def parse_news(news_data):
+    # Parse news data
     articles = news_data.get('data', [])
+    results = []  # Store results for return
     
     for article in articles:
         title = article.get('title')
@@ -44,16 +39,8 @@ def parse_news(news_data):
         url = article.get('url')
         image_url = article.get('image_url')
         
-        # Extract sentiment score
-        entities = article.get('entities', [])
-        sentiment_score = None
-        if entities:
-            sentiment_score = entities[0].get('sentiment_score')
-        
-        print(f"Title: {title}")
-        print(f"Published at: {published_at}")
-        print(f"Description: {description}")
-        print(f"Sentiment: {sentiment_score}")
-        print(f"URL: {url}")
-        print("-" * 50)
+        # Collecting the results
+        results.append((title, description, published_at, url, image_url))
+
+    return results  # Return the collected results
 

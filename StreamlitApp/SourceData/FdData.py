@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 import pandas as pd
 import requests
 
+#import helper funtions
+from transformation import clean_fd_df
+
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
 load_dotenv(dotenv_path='.env', override=True)
 apikey = os.environ.get("FDAI_KEY")
@@ -23,9 +26,13 @@ def fd_fs_data(ticker, period, limit=None):
         bs_data = fs_data.get('balance_sheets')
         cfs_data = fs_data.get('cash_flow_statements')
 
-        fd_is_df = pd.DataFrame(is_data)
-        fd_bs_df = pd.DataFrame(bs_data)
-        fd_cfs_df = pd.DataFrame(cfs_data)
+        is_df = pd.DataFrame(is_data)
+        bs_df = pd.DataFrame(bs_data)
+        cfs_df = pd.DataFrame(cfs_data)
+
+        fd_is_df = clean_fd_df(is_df)
+        fd_bs_df = clean_fd_df(bs_df)
+        fd_cfs_df = clean_fd_df(cfs_df)
 
     else:
         print("Failed to retrieve data from the API")

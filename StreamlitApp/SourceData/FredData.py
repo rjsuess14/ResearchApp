@@ -37,10 +37,10 @@ def fred_data(series_id, start_date=None, end_date=None):
         data = response.json()
         observations = data['observations']
         df = pd.DataFrame(observations)
-        df['date'] = pd.to_datetime(df['date'])
+        df['date'] = pd.to_datetime(df['date']).dt.date
         df['value'] = pd.to_numeric(df['value'], errors='coerce')
         df = df.dropna(subset=['value'])
-        df.set_index('date', inplace=True)
+        df.set_index('date', inplace=True, drop=False)
         return df
     else:
         response.raise_for_status()
@@ -68,3 +68,25 @@ def series_info(series_id):
         return response.json()['seriess'][0]
     else:
         response.raise_for_status()
+
+def fred_options():
+    return {
+        "10YR Minus 2YR Treasury": "T10Y2Y",
+        "10YR Minus 3M Treasury": "T10Y3M",
+        "10YR Treasury Yield": "DGS10",
+        "Federal Funds Rate": "FEDFUNDS",
+        "30YR Mortgage Rate": "MORTGAGE30US",
+        "Unemployment Rate": "UNRATE",
+        "Initial Jobless Claims": "ICSA",
+        "Total GDP": "GDP",
+        "Median CPI": "MEDCPIM158SFRBCLE",
+        "M2 Money Supply": "M2SL",
+        "FED Total Assets": "WALCL",
+        "Total Federal Debt": "GFDEBTN",
+        "Federal Debt to GDP": "GFDEGDQ188S",
+        "Government Surplus or Deficit": "FYFSD",
+        "Household Debt to GDP": "HDTGPDUSQ163N",
+        "Household Debt Service as Percent of Disposable Income": "TDSP",
+        "Credit Card Delinquency Rate": "DRCCLACBS"
+    }
+
