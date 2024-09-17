@@ -1,0 +1,17 @@
+run = "streamlit run StreamlitApp/main.py"
+language = "python3"
+entrypoint = "StreamlitApp/main.py"
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["sh", "-c", "streamlit run StreamlitApp/main.py"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 8501
+externalPort = 80
+
+                

@@ -4,20 +4,18 @@ import pandas as pd
 import requests
 
 #import helper funtions
-from transformation import clean_fd_df
+from SourceData.transformation import clean_fd_df
 
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
-load_dotenv(dotenv_path='.env', override=True)
-apikey = os.environ.get("FDAI_KEY")
+apikey = os.environ['FDAI_KEY']
 
-headers = {
-    "X-API-KEY": apikey
-}
+headers = {"X-API-KEY": apikey}
+
 
 #Fetch financial statement data
 def fd_fs_data(ticker, period, limit=None):
     fs_url = f'https://api.financialdatasets.ai/financials/'
-    querystring = {"ticker":ticker,"period":period,"limit":limit}
+    querystring = {"ticker": ticker, "period": period, "limit": limit}
     fs_response = requests.get(fs_url, headers=headers, params=querystring)
 
     if fs_response.status_code == 200:
@@ -38,11 +36,20 @@ def fd_fs_data(ticker, period, limit=None):
         print("Failed to retrieve data from the API")
     return fd_is_df, fd_bs_df, fd_cfs_df
 
+
 #Fetch financial statement data
 def price_data(ticker, interval, multiplier, start_date, end_date):
     price_url = f'https://api.financialdatasets.ai/prices'
-    querystring = {"ticker":ticker,"interval":interval,"interval_multiplier":multiplier,"start_date":start_date,"end_date":end_date}
-    price_response = requests.get(price_url, headers=headers, params=querystring)
+    querystring = {
+        "ticker": ticker,
+        "interval": interval,
+        "interval_multiplier": multiplier,
+        "start_date": start_date,
+        "end_date": end_date
+    }
+    price_response = requests.get(price_url,
+                                  headers=headers,
+                                  params=querystring)
 
     if price_response.status_code == 200:
         price_data = price_response.json().get('prices')
@@ -52,4 +59,3 @@ def price_data(ticker, interval, multiplier, start_date, end_date):
     else:
         print("Failed to retrieve data from the API")
     return price_df
-
