@@ -2,7 +2,7 @@
 
 ## Overview
 
-This equity research app is a comprehensive Streamlit-based web application designed to help users quickly analyze company data, news, and macroeconomic indicators. This tool provides a user-friendly interface for accessing and visualizing financial information, price history and various performance metrics.
+This tool is a comprehensive Streamlit-based web application designed to help users quickly analyze company data, news, and macroeconomic indicators for publically listed equities. The app provides a user-friendly interface for accessing and visualizing financial information, price history and various performance metrics.
 
 ## Features
 
