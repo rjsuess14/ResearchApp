@@ -7,6 +7,7 @@ import requests
 from SourceData.transformation import clean_fd_df
 
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
+load_dotenv()
 apikey = os.environ['FDAI_KEY']
 
 headers = {"X-API-KEY": apikey}

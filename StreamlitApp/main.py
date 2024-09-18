@@ -5,6 +5,7 @@ import requests
 import streamlit as st
 import plotly.graph_objects as go
 import pygwalker as pyg
+#from pygwalker.api.streamlit import StreamlitRenderer
 
 # Import functions from the existing file
 from SourceData.FdData import fd_fs_data, price_data
@@ -186,16 +187,17 @@ def profile_page():
 
         # Show company metrics
         st.subheader("Financial Metrics", divider=True)
-        # visualize and explore data
-        pyg_html = pyg.to_html(metric_df)
-        pyg_html_growth = pyg.to_html(fmp_growth_metrics(ticker))
+
+        #import data
+        metrics_tab = pyg.to_html(metric_df)
+        growth_tab = pyg.to_html(growth_df)
 
         # Embed pygwalker in streamlit with tabs
         tabs = st.tabs(["Fundamental Metrics", "Growth Metrics"])
         with tabs[0]:
-            st.components.v1.html(pyg_html, height=1200)
+            st.components.v1.html(metrics_tab, height=1200)
         with tabs[1]:
-            st.components.v1.html(pyg_html_growth, height=1200)
+            st.components.v1.html(growth_tab, height=1200)
         
 
 def financial_statements_page():

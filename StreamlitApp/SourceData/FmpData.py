@@ -7,6 +7,7 @@ import requests
 from SourceData.transformation import clean_fmp_df, clean_fmp_metrics
 
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
+load_dotenv()
 apikey = os.environ['FMP_KEY']
 
 

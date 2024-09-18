@@ -4,3 +4,4 @@ requests
 plotly
 python-dotenv
 fmpsdk
+pygwalker
