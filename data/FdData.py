@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 
 #import helper funtions
-from SourceData.transformation import clean_fd_df
+from data.transformation import clean_fd_df
 
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
 load_dotenv()

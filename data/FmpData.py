@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 
 #import helper funtions
-from SourceData.transformation import clean_fmp_df, clean_fmp_metrics
+from data.transformation import clean_fmp_df, clean_fmp_metrics
 
 # Actual API key is stored in a .env file.  Not good to store API key directly in script.
 load_dotenv()
