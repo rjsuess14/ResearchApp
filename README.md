@@ -1,4 +1,4 @@
-# ResearchApp
+# ResearchApp v2
 
 ## Overview
 
@@ -9,8 +9,11 @@ This tool is a comprehensive Streamlit-based web application designed to help us
 - **Company Overview**: Get detailed company information, including key metrics and growth indicators.
 - **Financial Statements**: Access and analyze income statements, balance sheets, and cash flow statements.
 - **Price Data**: Visualize historical stock price data with customizable time intervals.
+- **Filing Summary**: Choose a SEC filing and ask questions the contents using Gemini.
 - **News**: View the latest company-specific news articles.
 - **Macro Data**: Explore and visualize various macroeconomic indicators.
+
+[Watch Demo Video](https://www.loom.com/share/de32b6a9fb34419289fd56e76e78f507?sid=05a1e2f5-5951-429b-a3f9-eef0eac2d1e3)
 
 ## Data Sources
 - [Financial Modeling Prep](https://site.financialmodelingprep.com/)
@@ -25,10 +28,12 @@ This tool is a comprehensive Streamlit-based web application designed to help us
 2. Install the required dependencies: [pip install -r requirements.txt]
 3. Set up your environment variables:
 Create a `.env` file in the root directory and add your API keys:
-- `FMP_KEY=your_financial_modeling_prep_api_key`
-- `FDAI_KEY=your_financial_datasets_api_key`
-- `MARKETAUX_KEY=your_marketaux_api_key`
-- `FRED_API_KEY=your_fred_api_key`
+- `FMP_KEY = your_financial_modeling_prep_api_key`
+- `FDAI_KEY = your_financial_datasets_api_key`
+- `MARKETAUX_KEY = your_marketaux_api_key`
+- `FRED_API_KEY = your_fred_api_key`
+- `GEMINI_API_KEY = your_gemini_api_key`
+- `FIRECRAWL_API_KEY = your_firecrawl_api_key`
 
 
 ## Usage
@@ -41,12 +46,10 @@ Create a `.env` file in the root directory and add your API keys:
 
 ## Structure
 
-- `StreamlitApp/main.py`: The main Streamlit application file.
-- `StreamlitApp/SourceData/`: Contains modules for fetching data from various sources:
-- `FdData.py`: Functions for fetching financial data.
-- `FmpData.py`: Functions for fetching data from Financial Modeling Prep API.
-- `FredData.py`: Functions for fetching macroeconomic data from FRED.
-- `MarketauxNews.py`: Functions for fetching news data.
+- `app.py`: The main Streamlit application file.
+- `menu.py`: Contains the sidebar menu for navigating between pages.
+- `/pages/`: Contains modules for each page of the application.
+- `/data/`: Contains modules for fetching data from various sources:
 
 ## Contributing
 
